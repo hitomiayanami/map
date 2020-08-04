@@ -1,0 +1,18 @@
+mydata<-read.table("ljs.csv",header=TRUE,sep=",")
+visit.x<-mydata$long
+visit.y<-mydata$lat
+library(ggplot2)
+library(ggmap)
+library(sp)
+library(maptools)
+library(maps)
+mp<-NULL
+mapworld<-borders("nz",colour = "gray50",fill="white")
+mp<-ggplot(data=mydata, aes(x=long,y=lat,col=factor(group))) + 
+  mapworld + 
+  ylim(-50,-30) +
+  geom_point() +
+  theme(legend.position = "none") +
+  scale_colour_manual(values = c("red","green","yellow","brown")) +
+  labs(title = "title", x = "longitude",y="latitude")
+mp
